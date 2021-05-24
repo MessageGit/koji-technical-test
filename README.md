@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# React App for Koji
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a technical test created for Koji (Front-End)<br />
+This app get data from https://jsonplaceholder.typicode.com/posts/ and list all articles in page with possibility of view an specific article.<br />
+Using react-router-dom in Single-Page.
+<br /><br />My Portfolio: https://www.greeg.fr/
+## How to launch app
 
-## Available Scripts
+In the first time, go to folder of project and:
+<br /><br />
+cd ./koji-technical-test-master<br />
+npm start
 
-In the project directory, you can run:
+## Responses of questions
 
-### `npm start`
+<br /><b>Which library will you use to manage the state of the application?</b><br /><br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I mainly think to redux, is interesting to manage all states of an application. It has a simple architecture and globally breaks down all the actions into specific files. So, the communication between my app and the state becomes more accessible and fluid.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br /><b>What pages are needed?</b><br /><br />
 
-### `npm test`
+I think eight pages are needed at least, x2 pages for authentication (Signup/Login), x1 page for the board (first page after connection (= Panel)), this page allows an admin to preview and manage all templates, and, an user to view his documents and available templates ready to completion. Again, x3 pages for admins allowing them to Add new template / Edit existing template / View template (CRUD), x2 pages for user allowing to complete and view his documents.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br /><b>How will you arrange your navigation?</b><br /><br />
 
-### `npm run build`
+I mainly think to React-router-dom to manage all screens of my single-page application, in the first time, the user/admin is redirected on his board (after logging), a user has the possibility to check all/specifics templates from his board and complete them. On this page, we can manage all documents (and generate them) or templates (if user is admin).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br /><b>What are the minimum API requests you will need?</b><br /><br />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I think will needed 11 requests in total.
+<br /><br />
+Authentication: (2) One POST request for signup, one other request (method POST) for login.<br />
+Board: (2) One GET request to get all templates existing, one other to get all documents generated for an specific user.<br />
+Template: 4 requests for templates management (CRUD)<br />
+Documents: 3 requests for documents managements (Create, Read and Delete)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br /><b>How will you manage the execution of api requests and their asynchronous return?</b><br /><br />
 
-### `npm run eject`
+I will to create all requests of my application with Axios, it’s more efficient. All my requests will have HTTP Verbs for respect the level 2 maturity degree of my REST API (Richardson’s model). Finally, for manage my asynchronous requests and increase UX quality, I will to integrate an load-spinner during the loading time of my requests.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br /><b>How will you manage authentication?</b><br /><br />
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For manage authentication in my app, I will to sign JWT Token (back-end) after logging of my client and return it to my front-end in which I will stock it in localStorage or Redux (+1 for Redux for project using a JS library). I will to send my JWT Token every time I send a request to my API. For my admin rank, I will to stock a Boolean or RankID admin level in a front-end state variable (after client authentication) without forgetting to protect all end-points of my API.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br /><b>Bonus: You need to implement an optional "dark" version in the application. How will you proceed ?</b><br /><br />
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To implement an system of dark/light version in my web app, I will to create specifics classNames and create a new alpha-numeric variable in my state management for enable/disable dark version.
+For example, if my dark version is enabled, my theme variable will have “dark” value and my className: “theme-${contrast}”. It avoids use an conditional ternary operator for many items.
